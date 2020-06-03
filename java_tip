@@ -1,0 +1,51 @@
+﻿
+import java.util.*;
+
+1. 스트링 배열 선언
+
+String[] name = {"str1","str2","str3"};
+
+2. 배열 길이
+
+name.length
+
+3. 해시맵 선언
+
+HashMap<String, Integer> name = new HashMap<>(); 
+
+4. 해시맵 원소 넣기
+
+name.put("hee",24);
+
+5. 해시맵 value값 구하기
+
+name.get("hee");
+
+6. 해시맵 key값 유뮤
+
+name.containsKey("hee")
+
+->true, false로 출력
+
+7. 해시맵 key값만 가져오기
+
+name.keySet()
+
+->set객체로 반환
+
+8. 문자열 길이
+
+len.length()
+
+9. ArrayList 선언시 괄호 안에 넣어서 
+
+ArrayList<String> keyList = new ArrayList<>(movie_num.keySet());
+
+10. ArrayList 길이
+
+name.size()
+
+11. ArrayList 원소 추가, 삭제, 가져오기
+
+name.add(10), name.remove(10), name.get(index)
+﻿
