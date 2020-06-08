@@ -17,5 +17,5 @@ public class cm_arr {
 			System.out.printf("%-20.12f",ans_arr[i]*arr[j]);
 		System.out.println();
 		}
-	}
+	} 
 }
