@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Solution {
+
+    public int[] solution(int[] progresses, int[] speeds) {
+
+        int[] answer = {};
+
+        int time;
+
+        Queue<Integer> periods = new LinkedList<Integer>();
+
+        List<Integer> result = new ArrayList<Integer>();
+
+        
+
+        for(int i=0; i<progresses.length; i++){
+
+            time=(100-progresses[i])/speeds[i];
+
+            if((100-progresses[i])%speeds[i]!=0) time++;
+
+            periods.add(time);
+
+        }
+
+        
+
+        while(!periods.isEmpty()){
+
+            int cnt=1;
+
+            int period=periods.poll();​
+
+            while(!periods.isEmpty()&&period>=periods.peek()){
+
+                periods.poll();
+
+                cnt++;
+
+            }
+
+            result.add(cnt);
+
+        }
+
+        
+
+        answer = new int[result.size()];
+
+        for(int i=0; i<answer.length; i++){
+
+            answer[i]=result.get(i);
+
+        }
+
+        
+
+        return answer;
+
+    }
+
+}
+
+
