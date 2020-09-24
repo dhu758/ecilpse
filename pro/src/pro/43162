@@ -1,0 +1,22 @@
+class Solution {
+    public int solution(int n, int[][] computers) {
+        int answer = 0;
+        boolean[] check = new boolean[n];   //새로운 네트워크있는지 확인
+        for(int index0=0; index0<check.length; index0++){   //check 베열 확인
+            if(!check[index0]){ //false이면
+                dfs(computers, index0, check);  //재귀 부르는 부분
+                answer++;   //새로운 네트워크가 생기는 부분
+            }
+        }
+        return answer;
+    }
+    void dfs(int[][] computers, int index0, boolean[] check){   //재귀함수
+        check[index0] = true;   //true로 바꾸기
+        for(int index1=0; index1<computers[index0].length; index1++){   //check[index0] 확인
+            if(computers[index0][index1]==1&&index0!=index1&&check[index1]==false){
+                //값이 1이고, 자기자신 연결이 아니고, check[index1] 아직 네트워크 합류처리 안됐으면
+                dfs(computers, index1, check);  //check[index1] check하러가기
+            }
+        }
+    }
+}
