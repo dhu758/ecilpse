@@ -26,20 +26,17 @@ public class ps2644 {
 			System.out.println(0);
 			return;
 		}
-		dfs(y,bool,0);
-//		System.out.println();
+		dfs(y,bool,0)
 		System.out.println(answer);
 	}
 	private static void dfs(int c, boolean[] b, int sum) {
 		b[c] = true;
-//		System.out.println(c);
 		int p;
 		for(int i=0; i<num; i++) {
 			if(family[i][0] == c) {
 				p = family[i][1];
 				if(!b[p]) {
 					if(p==x) {
-//						System.out.println(p);
 						answer=sum+1;
 						return;
 					}
@@ -52,7 +49,6 @@ public class ps2644 {
 				p = family[i][0];
 				if(!b[p]) {
 					if(p==x) {
-//						System.out.println(p);
 						answer=sum+1;
 						return;
 					}
