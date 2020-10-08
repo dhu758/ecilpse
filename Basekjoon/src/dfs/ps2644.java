@@ -26,7 +26,7 @@ public class ps2644 {
 			System.out.println(0);
 			return;
 		}
-		dfs(y,bool,0)
+		dfs(y,bool,0);
 		System.out.println(answer);
 	}
 	private static void dfs(int c, boolean[] b, int sum) {
