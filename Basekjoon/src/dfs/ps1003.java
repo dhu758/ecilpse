@@ -27,6 +27,6 @@ public class ps1003 {
 			dp[n][0] = fibonacciNum(n-1)[0] + fibonacciNum(n-2)[0];
 			dp[n][1] = fibonacciNum(n-1)[1] + fibonacciNum(n-2)[1];
 		}
-		return dp[n];
+		return dp[n]; 
 	}
 }
