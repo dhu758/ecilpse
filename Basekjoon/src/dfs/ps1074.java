@@ -13,29 +13,27 @@ public class ps1074 {
 		c = sc.nextInt();
 		answer = 0;
 		int len = (int) Math.pow(2, N);
-		z(0,0,len);
-		
+		zFunc(0,0,len,0);
+		System.out.println(answer);
 	}
-	private static void z(int x, int y, int arrLen) {
-//		if(y > r || y+arrLen <= r || x > c || x+arrLen <= c) return;
-		if(arrLen==2) {
-			for(int dx=0; dx<=2; dx++) {
-				for(int dy=0; dy<=2; dy++) {
+	private static void zFunc(int x, int y, int len, int startNum) {
+		if(x>r||x+len<=r||y>c||y+len<=c) {return;}
+		if(len==2) {
+			for(int dx=0; dx<2; dx++) {
+				for(int dy=0; dy<2; dy++) {
 					if((x+dx)==r&&(y+dy)==c) {
-//						System.out.println(answer);
+						answer=startNum;
 						return;
 					}
-					answer++;
-					System.out.println(answer);
+					startNum++;
 				}
 			}
 		}
 		else {
-			int minusLen = arrLen/2;
-			z(x,y,minusLen);
-			z(x,y+minusLen,minusLen);
-			z(x+minusLen,y,minusLen);
-			z(x+minusLen,y+minusLen,minusLen);
+			zFunc(x,y,len/2,startNum);
+			zFunc(x,y+len/2,len/2,startNum+(len/2)*(len/2));
+			zFunc(x+len/2,y,len/2,startNum+(len/2)*(len/2)*2);
+			zFunc(x+len/2,y+len/2,len/2,startNum+(len/2)*(len/2)*3);
 		}
 	}
 }
