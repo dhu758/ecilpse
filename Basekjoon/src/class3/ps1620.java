@@ -1,4 +1,4 @@
-package dfs;
+package class3;
 
 import java.util.HashMap;
 import java.util.Scanner;
