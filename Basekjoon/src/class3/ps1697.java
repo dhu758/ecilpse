@@ -24,7 +24,7 @@ public class ps1697 {
 		Queue<Integer> q = new LinkedList<>();
 		q.add(num);
 		check[num]=1;
-		
+		 
 		while(!q.isEmpty()) {
 			int temp = q.poll();
 			for(int i=0; i<3; i++) {
