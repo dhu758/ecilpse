@@ -21,6 +21,7 @@ public class ps1697 {
 		}
 		System.out.println(answer);
 	}
+<<<<<<< HEAD
 	private static int bfs(int N) {
 		Queue<Integer> queue = new LinkedList<>();
 		queue.add(N);
@@ -29,6 +30,15 @@ public class ps1697 {
 		while(!queue.isEmpty()) {
 			int location = queue.poll();
 			int nextLocation;
+=======
+	private static void bfs(int num) {
+		Queue<Integer> q = new LinkedList<>();
+		q.add(num);
+		check[num]=1;
+		 
+		while(!q.isEmpty()) {
+			int temp = q.poll();
+>>>>>>> refs/remotes/origin/master
 			for(int i=0; i<3; i++) {
 				if(i==0) {
 					nextLocation = location-1;
