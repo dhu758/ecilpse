@@ -12,41 +12,43 @@ public class ps1697 {
 		Scanner sc = new Scanner(System.in);
 		N = sc.nextInt();
 		K = sc.nextInt();
-		
+		int answer;
 		if(N==K) {
-			System.out.println(0);
+			answer=0;
 		}
-		else {
-			bfs(N);
+		else{
+			answer = bfs(N);
 		}
+		System.out.println(answer);
 	}
-	private static void bfs(int num) {
-		Queue<Integer> q = new LinkedList<>();
-		q.add(num);
-		check[num]=1;
+	private static int bfs(int N) {
+		Queue<Integer> queue = new LinkedList<>();
+		queue.add(N);
+		check[N] = 0;
 		
-		while(!q.isEmpty()) {
-			int temp = q.poll();
+		while(!queue.isEmpty()) {
+			int location = queue.poll();
+			int nextLocation;
 			for(int i=0; i<3; i++) {
-				int next;
 				if(i==0) {
-					next = temp+1;
+					nextLocation = location-1;
 				}
 				else if(i==1) {
-					next = temp-1;
+					nextLocation = location+1;
 				}
 				else {
-					next = temp*2;
+					nextLocation = 2*location;
 				}
-				if(next==K) {
-					System.out.println(check[temp]);
-					return;
-				}
-				if(next>=0&&next<check.length&&check[next]==0) {
-					q.add(next);
-					check[next] = check[temp]+1;
+				if(nextLocation>=0&&nextLocation<=100000&&check[nextLocation]==0) {
+					check[nextLocation] = check[location]+1;
+					queue.add(nextLocation);
+					if(nextLocation==K) {
+						return check[nextLocation];
+					}
 				}
 			}
 		}
+		
+		return N;
 	}
 }
