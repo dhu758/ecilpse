@@ -1,119 +1,58 @@
 package class3;
-//
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.PriorityQueue;
-//import java.util.Scanner;
-//
-//public class ps7662 {
-//	public static void main(String[] args){
-//		Scanner sc = new Scanner(System.in);
-//		PriorityQueue<Integer> maxHeap;
-//        PriorityQueue<Integer> minHeap;
-//        int T = sc.nextInt();
-//        int insertNum=0;
-//        int deleteNum=0;
-//        ArrayList<String> answer = new ArrayList<>();
-//        for(int caseNum=0; caseNum<T; caseNum++) {
-//        	maxHeap = new PriorityQueue<>(Collections.reverseOrder());
-//        	minHeap = new PriorityQueue<>();
-//        	insertNum=0;
-//        	deleteNum=0;
-//        	int k = sc.nextInt();
-//        	for(int i=0; i<k; i++) {
-//        		String st = sc.next();
-//        		int n = sc.nextInt();
-//        		if(st.equals("I")) {
-//        			maxHeap.offer(n);
-//        			minHeap.offer(n);
-//        			insertNum++;
-//        		}
-//        		else if(st.equals("D")) {
-//        			if(insertNum>deleteNum) {
-//	        			if(n==1) {
-//	        				maxHeap.poll();
-//	        				deleteNum++;
-//	        			}
-//	        			else if(n==-1) {
-//	        				if(!minHeap.isEmpty()) {
-//	        					minHeap.poll();
-//	        					deleteNum++;
-//	        				}
-//	        			}
-//        			}
-//        		}
-//        	}
-//        	if(insertNum==deleteNum) {
-//        		answer.add("EMPTY");
-//        	}
-//        	else if(insertNum>deleteNum) {
-//        		answer.add(Integer.toString((maxHeap.poll()))+" "+Integer.toString((minHeap.poll())));
-//        	}
-//        }
-//        for(int i=0; i<answer.size(); i++) {
-//        	System.out.println(answer.get(i));
-//        }
-//	}
-//}
-
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 import java.util.TreeMap;
 
-class ps7662 {
-
+public class ps7662 {
+	static TreeMap<Long, Long> map;
 	public static void main(String[] args) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = new StringTokenizer(br.readLine()," ");
 		
-		int T = Integer.parseInt(br.readLine());
-
-		for(int tc=1; tc<=T; tc++){
-			int num = Integer.parseInt(br.readLine());
-			
-			TreeMap<Integer, Integer> treemap = new TreeMap<>();
-
-			for(int i=0; i<num; i++){
-				String[] temp = br.readLine().split(" ");
+		int T = Integer.parseInt(st.nextToken());
+		for(int tc = 0; tc < T; tc++) {
+			map = new TreeMap<>();
+			st = new StringTokenizer(br.readLine()," ");
+			int K = Integer.parseInt(st.nextToken());
+			for(int k = 0; k < K; k++) {
+				st = new StringTokenizer(br.readLine()," ");
+				char cmd = st.nextToken().charAt(0);
+				long n = Long.parseLong((st.nextToken()));
 				
-				int input = Integer.parseInt(temp[1]);
-				switch(temp[0]){
-					case "I":
-						if(treemap.containsKey(input))
-							treemap.put(input, treemap.get(input)+1);
+				if(cmd=='I') {
+					if(map.containsKey(n))
+						map.put(n, map.get(n)+1);
+					else
+						map.put(n, 1L);
+				}
+				else if(cmd == 'D') {
+					if(map.isEmpty()) continue;
+					if(n == -1) {
+						long minKey = map.firstKey();
+						long next = map.get(minKey)-1;
+						if(next == 0)
+							map.remove(minKey);
 						else
-							treemap.put(input, 1);
-						break;
-					case "D":
-						if(treemap.size() != 0){
-							if(input == -1){
-								int min = treemap.firstKey();
-								if(treemap.get(min) == 1)
-									treemap.remove(min);
-								else
-									treemap.put(min, treemap.get(min)-1);
-							}
-							else{
-								int max = treemap.lastKey();
-								if(treemap.get(max) == 1)
-									treemap.remove(max);
-								else
-									treemap.put(max, treemap.get(max)-1);
-							}
-						}
-						break;
+							map.put(minKey, next);
+					}
+					else if(n==1) {
+						long maxKey = map.lastKey();
+						long next = map.get(maxKey)-1;
+						if(next == 0)
+							map.remove(maxKey);
+						else
+							map.put(maxKey, next);
+					}
 				}
 			}
-
-			if(treemap.isEmpty())
-				sb.append("EMPTY\n");
-			else if(treemap.size() == 1)
-				sb.append(treemap.firstKey() + " " + treemap.firstKey());
-			else
-				sb.append(treemap.lastKey() + " " + treemap.firstKey());
+			if(map.isEmpty())
+				System.out.println("EMPTY");
+			else {
+				System.out.println(map.lastKey()+" "+map.firstKey());
+			}
 		}
-		System.out.println(sb.toString());
 	}
 }
