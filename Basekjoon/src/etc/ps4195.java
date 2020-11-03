@@ -15,33 +15,31 @@ public class ps4195 {
 		cnt[v] += cnt[u];
 	}
 	public static int find(int u) {
-		if(u==parent[u]) return u;
+		if(parent[u]==u) return u;
 		else return parent[u] = find(parent[u]);
 	}
 	public static void main(String[] args){
 		Scanner sc = new Scanner(System.in);
 		int T = sc.nextInt();
-		HashMap<String, Integer> hashmap;
+		HashMap<String, Integer> map;
 		for(int tc=0; tc<T; tc++) {
 			int F = sc.nextInt();
-			parent = new int[F*2+1];
-			cnt = new int[F*2+1];
-			hashmap = new HashMap<>();
 			int index=0;
+			map = new HashMap<>();
+			parent = new int[2*F+1];
+			cnt = new int[2*F+1];
 			for(int f=0; f<F; f++) {
 				String[] names = {sc.next(), sc.next()};
-				for(int i=0; i<2; i++) {
-					if(!hashmap.containsKey(names[i])){
-						cnt[index] = 1;
+				for(int i=0; i<names.length; i++) {
+					if(!map.containsKey(names[i])) {
+						map.put(names[i], index);
 						parent[index] = index;
-						hashmap.put(names[i], index);
+						cnt[index] = 1;
 						index++;
 					}
 				}
-				int u = hashmap.get(names[0]);
-				int v = hashmap.get(names[1]);
-				union(u,v);
-				System.out.println(cnt[find(v)]);
+				union(map.get(names[0]),map.get(names[1]));
+				System.out.println(cnt[find(map.get(names[1]))]);
 			}
 		}
 	}
